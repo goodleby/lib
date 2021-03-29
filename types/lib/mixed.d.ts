@@ -8,6 +8,7 @@ export declare const filterPhone: (phone: string, countryCode?: string | undefin
 export declare const camelize: (string: string) => string;
 export declare const addTime: (...time: string[]) => string;
 export declare const shuffleArr: <T>(array: T[]) => T[];
+export declare const getPermutations: <T>(items: T[]) => T[][];
 export declare const getDOM: (html: string) => Element[];
 export declare const getScrollbarWidth: () => number;
 export declare const getScrollbarHeight: () => number;

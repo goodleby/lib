@@ -5,6 +5,8 @@ import {
   floorTo,
   countDecimals,
   gcd,
+  factorial,
+  avg,
 } from '../math';
 
 describe('getRandNum', () => {
@@ -98,5 +100,19 @@ describe('gcd', () => {
   it('should return the gratest common divisor of two passed numbers no matter in what order', () => {
     expect(gcd(9, 15)).toBe(3);
     expect(gcd(25, 10)).toBe(5);
+  });
+});
+
+describe('factorial', () => {
+  it('should return factorial of a passed number', () => {
+    expect(factorial(5)).toBe(120);
+    expect(factorial(12)).toBe(479001600);
+  });
+});
+
+describe('avg', () => {
+  it('should return average of passed numbers', () => {
+    expect(avg(1, 2, 3, 4, 5, 6, 7, 8)).toBe(4.5);
+    expect(avg(350, 891, 3, 2400)).toBe(911);
   });
 });

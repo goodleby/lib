@@ -2,6 +2,7 @@
  * Multiply matrices with math error handling
  * @param A Matrix one
  * @param B Matrix two
+ * @returns Result matrix
  */
 export const matrixDot = (A: number[][], B: number[][]): number[][] => {
   // Math error handling
@@ -28,6 +29,7 @@ export const matrixDot = (A: number[][], B: number[][]): number[][] => {
  * Add up matrices with math error handling
  * @param A Matrix one
  * @param B Matrix two
+ * @returns Result matrix
  */
 export const matrixPlus = (A: number[][], B: number[][]): number[][] => {
   // Math error handling
@@ -47,6 +49,7 @@ export const matrixPlus = (A: number[][], B: number[][]): number[][] => {
  * Substract matrices with math error handling
  * @param A Matrix one
  * @param B Matrix two
+ * @returns Result matrix
  */
 export const matrixMinus = (A: number[][], B: number[][]): number[][] => {
   // Math error handling
@@ -81,6 +84,7 @@ export const linearMatrixDot = (A: number[][], B: number[][]): number[][] => {
  * Apply function to each matrix item
  * @param matrix Matrix to apply the function
  * @param fn Function to apply to the matrix
+ * @returns Result matrix
  */
 export const matrixApply = <T>(
   matrix: T[][],
@@ -102,18 +106,29 @@ export const getMatrix = <T>(
     );
 
 /**
- * Get a custom filled matrix clone
- * @param matrix Matrix to clone
- * @param fillFunction Function to fill the clone
+ * Get a deep matrix clone, optionally custom filled
+ * @param matrix Matrix to be cloned
+ * @param fillFn Optional function to fill the clone
+ * @param indexes Internal functionality parameter, do not set it
+ * @returns Deep clone of the matrix
  */
-export const getMatrixClone = (matrix: any[], fillFunction: () => any): any[] =>
-  matrix.map((item) =>
-    Array.isArray(item) ? getMatrixClone(item, fillFunction) : fillFunction()
-  );
+export const getMatrixClone = <T>(
+  matrix: T,
+  fillFn?: (indexes?: number[]) => any,
+  indexes: number[] = []
+): T => {
+  if (Array.isArray(matrix)) {
+    return matrix.map((item, i) =>
+      getMatrixClone(item, fillFn, indexes.concat([i]))
+    ) as T & T[];
+  }
+  return fillFn ? fillFn(indexes) : matrix;
+};
 
 /**
- *  Rotate a matrix shape
+ * Rotate a matrix shape
  * @param matrix Matrix to be transposed
+ * @returns Transposed matrix
  */
 export const transposeMatrix = <T>(matrix: T[][]): T[][] => {
   // Math error handling

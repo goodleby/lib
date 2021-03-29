@@ -4,3 +4,5 @@ export declare const roundTo: (number: number, decimals?: number) => number;
 export declare const floorTo: (number: number, decimals?: number) => number;
 export declare const countDecimals: (number: number) => number;
 export declare const gcd: (a: number, b: number) => number;
+export declare const factorial: (number: number) => number;
+export declare const avg: (...numbers: number[]) => number;

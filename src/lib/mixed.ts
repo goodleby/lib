@@ -1,12 +1,14 @@
 /**
  * Remove all trailing slashes from the end of url
  * @param url Url to remove slashed from
+ * @returns Url without trailing slashes
  */
 export const popSlash = (url: string): string => url.replace(/\/+$/, '');
 
 /**
  * Convert url to relative
  * @param url Url to be converted
+ * @returns Relative url
  */
 export const relativeUrl = (url: string): string =>
   popSlash(url.replace(/^(?:\/\/|[^/])+/, ''));
@@ -14,6 +16,7 @@ export const relativeUrl = (url: string): string =>
 /**
  * Escape a string to use it in a regular expression
  * @param string String to be escaped
+ * @returns Escaped string
  */
 export const regexpEscape = (string: string): string =>
   string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&');
@@ -22,6 +25,7 @@ export const regexpEscape = (string: string): string =>
  * Replace all keys of the passed object in the string with respective values
  * @param string String to be replaced
  * @param search Search object with replacement `key: value` entries
+ * @returns Replaced string
  */
 export const stringReplace = (
   string: string,
@@ -40,6 +44,7 @@ export const stringReplace = (
  * Filter out all symbols and whitespaces in a phone number, adding a country code if needed
  * @param phone Phone to be filtered
  * @param countryCode Optional. Country code to be added if needed
+ * @returns Clean phone number
  */
 export const filterPhone = (phone: string, countryCode?: string): string => {
   const regexp = new RegExp(
@@ -54,6 +59,7 @@ export const filterPhone = (phone: string, countryCode?: string): string => {
 /**
  * Convert any string into camel case string
  * @param string String to be converted
+ * @returns String in the camel case
  */
 export const camelize = (string: string): string => {
   const result = string.replace(/[^a-z]+([a-z])?/gi, (_, letter) =>
@@ -65,6 +71,7 @@ export const camelize = (string: string): string => {
 /**
  * Add up time strings of format HH:MM or HH:MM:SS
  * @param time Time string in format HH:MM or HH:MM:SS
+ * @returns Result time string
  */
 export const addTime = (...time: string[]): string => {
   const operands = time.reduce(
@@ -87,6 +94,7 @@ export const addTime = (...time: string[]): string => {
 /**
  * Get a randomly shuffled array
  * @param array Array to be shuffled
+ * @returns Randomly shuffled array
  */
 export const shuffleArr = <T>(array: T[]): T[] => {
   const arr = array.slice();
@@ -98,8 +106,21 @@ export const shuffleArr = <T>(array: T[]): T[] => {
 };
 
 /**
+ * Get a list of all permutations of an array
+ * @param items Array to get permutations of
+ * @returns All permutations of passed items
+ */
+export const getPermutations = <T>(items: T[]): T[][] =>
+  items.flatMap((item, i) => {
+    if (items.length === 1) return [[item]];
+    const mutations = getPermutations(items.filter((_, j) => i !== j));
+    return mutations.map((rest) => [item, ...rest]);
+  });
+
+/**
  * Convert html string into array of DOM elements
  * @param html Html string to be converted
+ * @returns Array of DOM elements
  */
 export const getDOM = (html: string): Element[] => {
   const block = document.createElement('div');
@@ -109,12 +130,14 @@ export const getDOM = (html: string): Element[] => {
 
 /**
  * Get a vertical scrollbar width
+ * @returns Vertical scrollbar width
  */
 export const getScrollbarWidth = (): number =>
   window.innerWidth - document.body.clientWidth;
 
 /**
  * Get a horizontal scrollbar height
+ * @returns Horizontal scrollbar height
  */
 export const getScrollbarHeight = (): number =>
   window.innerHeight - document.body.clientHeight;
@@ -122,6 +145,7 @@ export const getScrollbarHeight = (): number =>
 /**
  * Get memoized function from function for better performance
  * @param fn Function to be memoized
+ * @returns Memoized function
  */
 export const getMemoizedFn = (
   fn: (...args: any[]) => any
@@ -138,6 +162,7 @@ export const getMemoizedFn = (
  * @param callback Function to be debounced
  * @param delay Delay until the call is made
  * @param maxDelay Optional. Maximum delay allowed
+ * @returns Debounced function
  */
 export const debounce = (
   callback: (...args: any[]) => any,

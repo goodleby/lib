@@ -11,6 +11,8 @@ My library of typed and tested javascript functions
   - floorTo
   - countDecimals
   - gcd
+  - factorial
+  - avg
 - matrices
   - matrixDot
   - matrixPlus
@@ -29,6 +31,7 @@ My library of typed and tested javascript functions
   - camelize
   - addTime
   - shuffleArr
+  - getPermutations
   - getDOM
   - getScrollbarWidth
   - getScrollbarHeight

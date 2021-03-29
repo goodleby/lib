@@ -177,16 +177,49 @@ describe('getMatrix', () => {
 });
 
 describe('getMatrixClone', () => {
+  it('should return a deep clone of the passed matrix', () => {
+    const matrix = [
+      [
+        [3, 2, 5],
+        [6, 4, 1],
+      ],
+      [
+        [7, 2, 1],
+        [3, 3, 8],
+      ],
+    ];
+    const result = [
+      [
+        [3, 2, 5],
+        [6, 4, 1],
+      ],
+      [
+        [7, 2, 1],
+        [3, 3, 8],
+      ],
+    ];
+    expect(getMatrixClone(matrix)).toStrictEqual(result);
+  });
+
   it('should return a custom filled clone of the passed matrix', () => {
+    const fillFn = jest.fn((indexes: number[]) =>
+      indexes.reduce((acc, item) => acc + item, 0)
+    );
     const matrix = [
       [3, 2, 5],
       [6, 4, 1],
     ];
     const result = [
-      [3, 3, 3],
-      [3, 3, 3],
+      [0, 1, 2],
+      [1, 2, 3],
     ];
-    expect(getMatrixClone(matrix, () => 3)).toStrictEqual(result);
+    expect(getMatrixClone(matrix, fillFn)).toStrictEqual(result);
+    expect(fillFn).toHaveBeenNthCalledWith(1, [0, 0]);
+    expect(fillFn).toHaveBeenNthCalledWith(2, [0, 1]);
+    expect(fillFn).toHaveBeenNthCalledWith(3, [0, 2]);
+    expect(fillFn).toHaveBeenNthCalledWith(4, [1, 0]);
+    expect(fillFn).toHaveBeenNthCalledWith(5, [1, 1]);
+    expect(fillFn).toHaveBeenNthCalledWith(6, [1, 2]);
   });
 });
 
