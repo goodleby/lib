@@ -1,10 +1,10 @@
 import { getRandNum } from './math';
 
 /**
- * Get array of prime numbers with min and max including both
- * @param min Minimum number to be able to generate
- * @param max Maximum number to be able to generate
- * @returns Array of prime numbers
+ * Create an array of primes in the range [min, max]
+ * @param min Minimum number to include
+ * @param max Maximum number to include
+ * @returns Array of primes
  */
 export const getPrimes = (min: number, max: number): number[] => {
   const result = Array(max + 1)
@@ -13,14 +13,14 @@ export const getPrimes = (min: number, max: number): number[] => {
   for (let i = 2; i <= Math.sqrt(max + 1); i++) {
     for (let j = i ** 2; j < max + 1; j += i) delete result[j];
   }
-  return Object.values(result.slice(min));
+  return Object.values(result.slice(Math.max(min, 2)));
 };
 
 /**
- * Get a random prime number with min and max including both
- * @param min Minimum number to be able to generate
- * @param max Maximum number to be able to generate
- * @returns Random prime number
+ * Generate a random prime in the range [min, max]
+ * @param min Minimum number to generate
+ * @param max Maximum number to generate
+ * @returns Random prime
  */
 export const getRandPrime = (min: number, max: number): number => {
   const primes = getPrimes(min, max);

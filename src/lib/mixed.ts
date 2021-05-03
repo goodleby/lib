@@ -1,31 +1,39 @@
+import { getRandNum } from './math';
+
+// Errors
+export const ERR_TIME_FORMAT =
+  'Strings must be in the same format: HH:MM or HH:MM:SS';
+export const ERR_MAX_WAIT =
+  '`maxWait` must be greater than or equal to the `wait` period';
+
 /**
- * Remove all trailing slashes from the end of url
- * @param url Url to remove slashed from
- * @returns Url without trailing slashes
+ * Filter out trailing slash from URL
+ * @param url URL to filter
+ * @returns URL without trailing slash
  */
 export const popSlash = (url: string): string => url.replace(/\/+$/, '');
 
 /**
- * Convert url to relative
- * @param url Url to be converted
- * @returns Relative url
+ * Convert any URL to relative without trailing slash
+ * @param url URL to convert
+ * @returns Relative URL without trailing slash
  */
 export const relativeUrl = (url: string): string =>
   popSlash(url.replace(/^(?:\/\/|[^/])+/, ''));
 
 /**
- * Escape a string to use it in a regular expression
- * @param string String to be escaped
- * @returns Escaped string
+ * Escape a string for RegExp
+ * @param string String to escape
+ * @returns Escaped string for RegExp
  */
 export const regexpEscape = (string: string): string =>
   string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&');
 
 /**
- * Replace all keys of the passed object in the string with respective values
- * @param string String to be replaced
+ * Replace all keys of the search object with the corresponding values in a string
+ * @param string String to perform replacement
  * @param search Search object with replacement `key: value` entries
- * @returns Replaced string
+ * @returns Modified string
  */
 export const stringReplace = (
   string: string,
@@ -41,10 +49,10 @@ export const stringReplace = (
 };
 
 /**
- * Filter out all symbols and whitespaces in a phone number, adding a country code if needed
- * @param phone Phone to be filtered
- * @param countryCode Optional. Country code to be added if needed
- * @returns Clean phone number
+ * Filter out all symbols and whitespaces in a phone number, adding a country code if it is not present
+ * @param phone Phone number to filter
+ * @param countryCode Optional. Country code to add to the filtered phone number if not present
+ * @returns Filtered phone number
  */
 export const filterPhone = (phone: string, countryCode?: string): string => {
   const regexp = new RegExp(
@@ -57,58 +65,61 @@ export const filterPhone = (phone: string, countryCode?: string): string => {
 };
 
 /**
- * Convert any string into camel case string
- * @param string String to be converted
- * @returns String in the camel case
+ * Convert any string to camel case
+ * @param string String to convert
+ * @param isUpper Optional, default is false. Whether to make the first letter uppercase
+ * @returns Camel case string
  */
-export const camelize = (string: string): string => {
+export const camelize = (string: string, isUpper = false): string => {
   const result = string.replace(/[^a-z]+([a-z])?/gi, (_, letter) =>
     letter ? letter.toUpperCase() : ''
   );
-  return result[0].toLowerCase() + result.slice(1);
+  return isUpper ? result : result[0].toLowerCase() + result.slice(1);
 };
 
 /**
- * Add up time strings of format HH:MM or HH:MM:SS
- * @param time Time string in format HH:MM or HH:MM:SS
+ * Sum all passed time strings. Strings must be in the same format: HH:MM or HH:MM:SS
+ * @param time Time strings in the format HH:MM or HH:MM:SS
  * @returns Result time string
  */
 export const addTime = (...time: string[]): string => {
-  const operands = time.reduce(
-    (acc, item) =>
-      item.split(':').length > acc ? item.split(':').length : acc,
-    0
-  );
-  const sum = Array(operands)
+  if (
+    time.some((item) => time[0].split(':').length !== item.split(':').length)
+  ) {
+    throw new Error(ERR_TIME_FORMAT);
+  }
+
+  const operands = time[0].split(':').length;
+  const numbers = Array(operands)
     .fill(0)
     .map((_, i) =>
-      time.reduce((acc, item, j) => acc + Number(time[j].split(':')[i] || 0), 0)
+      time.reduce((acc, item, j) => acc + Number(time[j].split(':')[i]), 0)
     );
   for (let i = operands - 2; i >= 0; i--) {
-    sum[i] += Math.floor(sum[i + 1] / 60);
-    sum[i + 1] %= 60;
+    numbers[i] += Math.floor(numbers[i + 1] / 60);
+    numbers[i + 1] %= 60;
   }
-  return sum.map((item) => (item < 10 ? `0${item}` : item)).join(':');
+  return numbers.map((item) => (item < 10 ? `0${item}` : item)).join(':');
 };
 
 /**
- * Get a randomly shuffled array
- * @param array Array to be shuffled
+ * Randomly shuffle an array
+ * @param array Array to shuffle
  * @returns Randomly shuffled array
  */
 export const shuffleArr = <T>(array: T[]): T[] => {
   const arr = array.slice();
-  for (let i = arr.length - 1; i > 0; i--) {
-    const randI = Math.floor(Math.random() * (i + 1));
+  for (let i = 0; i < arr.length; i++) {
+    const randI = getRandNum(i, arr.length - i);
     [arr[i], arr[randI]] = [arr[randI], arr[i]];
   }
   return arr;
 };
 
 /**
- * Get a list of all permutations of an array
- * @param items Array to get permutations of
- * @returns All permutations of passed items
+ * Get an array of all permutations of items
+ * @param items Array of items for getting permutations
+ * @returns Array of all permutations of items
  */
 export const getPermutations = <T>(items: T[]): T[][] =>
   items.flatMap((item, i) => {
@@ -118,8 +129,8 @@ export const getPermutations = <T>(items: T[]): T[][] =>
   });
 
 /**
- * Convert html string into array of DOM elements
- * @param html Html string to be converted
+ * Convert HTML string to an array of DOM elements
+ * @param html HTML string to convert
  * @returns Array of DOM elements
  */
 export const getDOM = (html: string): Element[] => {
@@ -129,69 +140,85 @@ export const getDOM = (html: string): Element[] => {
 };
 
 /**
- * Get a vertical scrollbar width
- * @returns Vertical scrollbar width
+ * Get the width of a vertical scrollbar
+ * @returns Width of a vertical scrollbar
  */
 export const getScrollbarWidth = (): number =>
   window.innerWidth - document.body.clientWidth;
 
 /**
- * Get a horizontal scrollbar height
- * @returns Horizontal scrollbar height
+ * Get the height of a horizontal scrollbar
+ * @returns Height of a horizontal scrollbar
  */
 export const getScrollbarHeight = (): number =>
   window.innerHeight - document.body.clientHeight;
 
 /**
- * Get memoized function from function for better performance
- * @param fn Function to be memoized
+ * Memoize a function to return a cached result for the same arguments
+ * @param func Function to memoize
+ * @param getId Function for generating an id for caching depending on the arguments
  * @returns Memoized function
  */
-export const getMemoizedFn = (
-  fn: (...args: any[]) => any
-): ((...args: any[]) => any) => {
-  const cache: { [key: string]: any } = {};
-  return (...args: any[]) => {
-    const key = JSON.stringify(args);
-    return cache[key] || (cache[key] = fn(...args));
+export const getMemoizedFn = <T extends (...args: any[]) => any>(
+  func: T,
+  getId: (...args: Parameters<T>) => string = (...args) => JSON.stringify(args)
+): ((...args: Parameters<T>) => ReturnType<T>) => {
+  const cache: { [key: string]: ReturnType<T> } = {};
+  return (...args: Parameters<T>) => {
+    const key = getId(...args);
+    return cache[key] || (cache[key] = func(...args));
   };
 };
 
 /**
- * Get debounced function with reduced requests frequency
- * @param callback Function to be debounced
- * @param delay Delay until the call is made
- * @param maxDelay Optional. Maximum delay allowed
+ * Debounce a function to reduce requests frequency
+ * @param func Function to debounce
+ * @param wait Waiting period for the call
+ * @param maxWait Optional. Maximum waiting period before the next call
  * @returns Debounced function
  */
-export const debounce = (
-  callback: (...args: any[]) => any,
-  delay: number,
-  maxDelay: number | null = null
-): ((...args: any[]) => void) => {
-  let timeout: NodeJS.Timeout | null = null;
-  let lastCall: number | null = null;
-  const call = (...args: any[]) => {
-    lastCall = null;
-    callback(...args);
-  };
-  return (...args: any[]) => {
-    if (!lastCall) lastCall = performance.now();
-    if (timeout) {
-      clearTimeout(timeout);
-      timeout = null;
+export const debounce = <T extends (...args: any[]) => void>(
+  func: T,
+  wait: number,
+  maxWait?: number
+): ((...args: Parameters<T>) => void) => {
+  if (maxWait && maxWait < wait) {
+    throw new Error(ERR_MAX_WAIT);
+  }
+
+  let mainTimer: NodeJS.Timeout | null = null;
+  let maxTimer: NodeJS.Timeout | null = null;
+
+  return (...args: Parameters<T>): void => {
+    const call = () => {
+      func(...args);
+      if (mainTimer) {
+        clearTimeout(mainTimer);
+        mainTimer = null;
+      }
+      if (maxTimer) {
+        clearTimeout(maxTimer);
+        maxTimer = null;
+      }
+    };
+
+    if (mainTimer) {
+      clearTimeout(mainTimer);
+      mainTimer = null;
+    } else if (maxWait) {
+      maxTimer = setTimeout(call, maxWait);
     }
-    if (maxDelay && performance.now() - lastCall >= maxDelay) {
-      call(...args);
-    } else timeout = setTimeout(() => call(...args), delay);
+
+    mainTimer = setTimeout(call, wait);
   };
 };
 
 /**
- * Uses a callback when the user swipes on the element passing event and direction as arguments
- * @param element Element to register swipes on
- * @param callback Function to be called on swipe event
- * @param opts Optional. Options of the event
+ * Listen to touch events and execute callback when the user has swiped for at least specified threshold
+ * @param element Element to listen to touch events
+ * @param callback Callback function that gets TocuhEvent and direction string
+ * @param options Optional. Event listener options:
+ * * `swipeLength` - Default is 50. Swipe threshold in pixels
  */
 export const onSwipe = (
   element: HTMLElement,
@@ -199,39 +226,43 @@ export const onSwipe = (
     e: TouchEvent,
     direction: 'left' | 'right' | 'up' | 'down'
   ) => void,
-  opts = {
-    swipeLength: 50,
-  }
+  options: {
+    swipeLength?: number;
+  } = {}
 ): void => {
+  const { swipeLength = 50 } = options;
   const swiper = {
     startX: 0,
     startY: 0,
+
     onTouchStart(e: TouchEvent) {
-      const { clientX, clientY } = e.changedTouches[0];
+      const { clientX, clientY } = e.touches[0];
       this.startX = clientX;
       this.startY = clientY;
-      element.addEventListener('touchend', this.onTouchEnd);
-      element.addEventListener('touchmove', this.onTouchMove);
+      element.addEventListener('touchend', swiper.onTouchEnd);
+      element.addEventListener('touchmove', swiper.onTouchMove);
     },
+
     onTouchMove(e: TouchEvent) {
-      const { swipeLength } = opts;
       const { startX, startY } = this;
-      const { clientX, clientY } = e.changedTouches[0];
+      const { clientX, clientY } = e.touches[0];
       const deltaX = clientX - startX;
       const deltaY = clientY - startY;
-      if (deltaX >= swipeLength) callback(e, 'right');
-      if (deltaX <= -swipeLength) callback(e, 'left');
-      if (deltaY >= swipeLength) callback(e, 'down');
       if (deltaY <= -swipeLength) callback(e, 'up');
+      if (deltaY >= swipeLength) callback(e, 'down');
+      if (deltaX <= -swipeLength) callback(e, 'left');
+      if (deltaX >= swipeLength) callback(e, 'right');
       if (Math.abs(deltaX) >= swipeLength || Math.abs(deltaY) >= swipeLength) {
-        element.removeEventListener('touchend', this.onTouchEnd);
-        element.removeEventListener('touchmove', this.onTouchMove);
+        element.removeEventListener('touchend', swiper.onTouchEnd);
+        element.removeEventListener('touchmove', swiper.onTouchMove);
       }
     },
+
     onTouchEnd() {
-      element.removeEventListener('touchend', this.onTouchEnd);
-      element.removeEventListener('touchmove', this.onTouchMove);
+      element.removeEventListener('touchend', swiper.onTouchEnd);
+      element.removeEventListener('touchmove', swiper.onTouchMove);
     },
   };
+
   element.addEventListener('touchstart', swiper.onTouchStart);
 };
