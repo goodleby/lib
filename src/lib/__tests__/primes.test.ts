@@ -1,4 +1,4 @@
-import { getPrimes, getRandPrime } from '../primes';
+import { getPrimes, randPrime } from '../primes';
 
 describe('getPrimes', () => {
   it('should generate an array of primes in the range [min, max]', () => {
@@ -10,7 +10,7 @@ describe('getPrimes', () => {
   });
 });
 
-describe('getRandPrime', () => {
+describe('randPrime', () => {
   beforeEach(() => {
     jest
       .spyOn(global.Math, 'random')
@@ -27,8 +27,8 @@ describe('getRandPrime', () => {
     const min = 7;
     const max = 29;
 
-    expect(getRandPrime(min, max)).toBe(7);
-    expect(getRandPrime(min, max)).toBe(17);
-    expect(getRandPrime(min, max)).toBe(29);
+    expect(randPrime(min, max)).toBe(7);
+    expect(randPrime(min, max)).toBe(17);
+    expect(randPrime(min, max)).toBe(29);
   });
 });

@@ -1,6 +1,6 @@
 import {
-  getRandNum,
-  getRandBool,
+  randNum,
+  randBool,
   roundTo,
   floorTo,
   ceilTo,
@@ -10,7 +10,7 @@ import {
   avg,
 } from '../math';
 
-describe('getRandNum', () => {
+describe('randNum', () => {
   beforeEach(() => {
     jest
       .spyOn(global.Math, 'random')
@@ -24,19 +24,19 @@ describe('getRandNum', () => {
   });
 
   it('should generate a random number in the range [min, max]', () => {
-    expect(getRandNum(1, 9)).toBe(1);
-    expect(getRandNum(1, 9)).toBe(5);
-    expect(getRandNum(1, 9)).toBe(9);
+    expect(randNum(1, 9)).toBe(1);
+    expect(randNum(1, 9)).toBe(5);
+    expect(randNum(1, 9)).toBe(9);
   });
 
   it('should take an optional third argument, an array of numbers to exclude from generation', () => {
-    expect(getRandNum(1, 9, [1, 5, 6, 9])).toBe(2);
-    expect(getRandNum(1, 9, [1, 5, 6, 9])).toBe(4);
-    expect(getRandNum(1, 9, [1, 5, 6, 9])).toBe(8);
+    expect(randNum(1, 9, [1, 5, 6, 9])).toBe(2);
+    expect(randNum(1, 9, [1, 5, 6, 9])).toBe(4);
+    expect(randNum(1, 9, [1, 5, 6, 9])).toBe(8);
   });
 });
 
-describe('getRandBool', () => {
+describe('randBool', () => {
   afterEach(() => {
     jest.spyOn(global.Math, 'random').mockRestore();
   });
@@ -50,7 +50,7 @@ describe('getRandBool', () => {
       .mockImplementation(() => random++ / range);
     const results = Array(range)
       .fill(null)
-      .map(() => getRandBool(rate));
+      .map(() => randBool(rate));
     expect(results.filter((item) => item)).toHaveLength(rate * range);
   });
 
@@ -63,7 +63,7 @@ describe('getRandBool', () => {
       .mockImplementation(() => random++ / range);
     const results = Array(range)
       .fill(null)
-      .map(() => getRandBool());
+      .map(() => randBool());
     expect(results.filter((item) => item)).toHaveLength(rate * range);
   });
 });

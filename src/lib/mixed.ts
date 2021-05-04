@@ -1,4 +1,4 @@
-import { getRandNum } from './math';
+import { randNum } from './math';
 
 // Errors
 export const ERR_TIME_FORMAT =
@@ -35,7 +35,7 @@ export const regexpEscape = (string: string): string =>
  * @param search Search object with replacement `key: value` entries
  * @returns Modified string
  */
-export const stringReplace = (
+export const replaceStr = (
   string: string,
   search: { [key: string]: string }
 ): string => {
@@ -82,7 +82,7 @@ export const camelize = (string: string, isUpper = false): string => {
  * @param time Time strings in the format HH:MM or HH:MM:SS
  * @returns Result time string
  */
-export const addTime = (...time: string[]): string => {
+export const sumTime = (...time: string[]): string => {
   if (
     time.some((item) => time[0].split(':').length !== item.split(':').length)
   ) {
@@ -107,10 +107,10 @@ export const addTime = (...time: string[]): string => {
  * @param array Array to shuffle
  * @returns Randomly shuffled array
  */
-export const shuffleArr = <T>(array: T[]): T[] => {
+export const shuffle = <T>(array: T[]): T[] => {
   const arr = array.slice();
   for (let i = 0; i < arr.length; i++) {
-    const randI = getRandNum(i, arr.length - i - 1);
+    const randI = randNum(i, arr.length - i - 1);
     [arr[i], arr[randI]] = [arr[randI], arr[i]];
   }
   return arr;
@@ -159,7 +159,7 @@ export const getScrollbarHeight = (): number =>
  * @param getId Function for generating an id for caching depending on the arguments
  * @returns Memoized function
  */
-export const getMemoizedFn = <T extends (...args: any[]) => any>(
+export const memoize = <T extends (...args: any[]) => any>(
   func: T,
   getId: (...args: Parameters<T>) => string = (...args) => JSON.stringify(args)
 ): ((...args: Parameters<T>) => ReturnType<T>) => {

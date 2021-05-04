@@ -1,5 +1,5 @@
-export declare const getRandNum: (min: number, max: number, exclude?: number[]) => number;
-export declare const getRandBool: (rate?: number) => boolean;
+export declare const randNum: (min: number, max: number, exclude?: number[]) => number;
+export declare const randBool: (rate?: number) => boolean;
 export declare const roundTo: (number: number, decimals?: number) => number;
 export declare const floorTo: (number: number, decimals?: number) => number;
 export declare const ceilTo: (number: number, decimals?: number) => number;

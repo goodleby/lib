@@ -4,8 +4,8 @@ export declare const ERR_MATRIX_MULTIPLY = "The number of columns in the 1st mat
 export declare const matrixDot: (A: number[][], B: number[][]) => number[][];
 export declare const matrixPlus: (...matrices: number[][][]) => number[][];
 export declare const matrixMinus: (A: number[][], B: number[][]) => number[][];
-export declare const linearMatrixDot: (...matrices: number[][][]) => number[][];
+export declare const matrixMultiply: (...matrices: number[][][]) => number[][];
 export declare const matrixApply: <T>(matrix: T[][], func: (item: T, x: number, y: number) => T) => T[][];
 export declare const getMatrix: <T>(rows: number, cols: number, fillFunc: (x: number, y: number) => T) => T[][];
-export declare const getMatrixClone: <T>(matrix: T, fillFunc?: ((indices?: number[] | undefined) => any) | undefined, indices?: number[]) => T;
+export declare const cloneMatrix: <T>(matrix: T, fillFunc?: ((indices?: number[] | undefined) => any) | undefined, indices?: number[]) => T;
 export declare const transposeMatrix: <T>(matrix: T[][]) => T[][];

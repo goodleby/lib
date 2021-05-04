@@ -81,7 +81,7 @@ export const matrixMinus = (A: number[][], B: number[][]): number[][] => {
  * @param B Matrix two
  * @returns Result matrix
  */
-export const linearMatrixDot = (...matrices: number[][][]): number[][] => {
+export const matrixMultiply = (...matrices: number[][][]): number[][] => {
   // Error handling
   const mx = matrices[0];
   const cols = mx.length;
@@ -139,14 +139,14 @@ export const getMatrix = <T>(
  * @param indices Do not set, internal functionality argument
  * @returns Deep clone of a matrix
  */
-export const getMatrixClone = <T>(
+export const cloneMatrix = <T>(
   matrix: T,
   fillFunc?: (indices?: number[]) => any,
   indices: number[] = []
 ): T => {
   if (Array.isArray(matrix)) {
     return matrix.map((item, i) =>
-      getMatrixClone(item, fillFunc, indices.concat([i]))
+      cloneMatrix(item, fillFunc, indices.concat([i]))
     ) as T & T[];
   }
   return fillFunc ? fillFunc(indices) : matrix;

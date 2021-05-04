@@ -2,11 +2,11 @@
 
 ## Math
 
-#### `getRandNum`
+#### `randNum`
 
 _Generate a random number in the range [min, max] with an optional array of numbers to exclude_
 
-#### `getRandBool`
+#### `randBool`
 
 _Generate a random boolean with success rate_
 
@@ -52,7 +52,7 @@ _Sum matrices with error handling_
 
 _Substract matrices with error handling_
 
-#### `linearMatrixDot`
+#### `matrixMultiply`
 
 _Multiply corresponding items of matrices with error handling_
 
@@ -64,7 +64,7 @@ _Apply a function to each item of the matrix_
 
 _Create a matrix with rows and columns and fill it_
 
-#### `getMatrixClone`
+#### `cloneMatrix`
 
 _Deep clone a matrix and optionally fill it_
 
@@ -78,7 +78,7 @@ _Transpose a matrix_
 
 _Create an array of primes in the range [min, max]_
 
-#### `getRandPrime`
+#### `randPrime`
 
 _Generate a random prime in the range [min, max]_
 
@@ -96,7 +96,7 @@ _Convert any URL to relative without trailing slash_
 
 _Escape a string for RegExp_
 
-#### `stringReplace`
+#### `replaceStr`
 
 _Replace all keys of the search object with the corresponding values in a string_
 
@@ -108,11 +108,11 @@ _Filter out all symbols and whitespaces in a phone number, adding a country code
 
 _Convert any string to camel case_
 
-#### `addTime`
+#### `sumTime`
 
 _Sum all passed time strings. Strings must be in the same format: HH:MM or HH:MM:SS_
 
-#### `shuffleArr`
+#### `shuffle`
 
 _Randomly shuffle an array_
 
@@ -132,7 +132,7 @@ _Get the width of a vertical scrollbar_
 
 _Get the height of a horizontal scrollbar_
 
-#### `getMemoizedFn`
+#### `memoize`
 
 _Memoize a function to return a cached result for the same arguments_
 

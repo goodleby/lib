@@ -4,16 +4,16 @@ import {
   popSlash,
   relativeUrl,
   regexpEscape,
-  stringReplace,
+  replaceStr,
   filterPhone,
   camelize,
-  addTime,
-  shuffleArr,
+  sumTime,
+  shuffle,
   getPermutations,
   getDOM,
   getScrollbarWidth,
   getScrollbarHeight,
-  getMemoizedFn,
+  memoize,
   debounce,
   onSwipe,
 } from '../mixed';
@@ -54,7 +54,7 @@ describe('regexpEscape', () => {
   });
 });
 
-describe('stringReplace', () => {
+describe('replaceStr', () => {
   it('should replace all keys of the search object with the corresponding values in a string', () => {
     const string = 'The quick brown fox jumps over the lazy dog';
     const search = {
@@ -64,7 +64,7 @@ describe('stringReplace', () => {
     };
     const result = 'The slow red fox jumps over the lazy cat';
 
-    expect(stringReplace(string, search)).toBe(result);
+    expect(replaceStr(string, search)).toBe(result);
   });
 });
 
@@ -102,26 +102,26 @@ describe('camelize', () => {
   });
 });
 
-describe('addTime', () => {
+describe('sumTime', () => {
   it('should sum all passed time strings in the format HH:MM', () => {
-    expect(addTime('01:25', '02:45')).toBe('04:10');
+    expect(sumTime('01:25', '02:45')).toBe('04:10');
   });
 
   it('should sum all passed time strings in the format HH:MM:SS', () => {
-    expect(addTime('02:30:30', '03:29:30')).toBe('06:00:00');
+    expect(sumTime('02:30:30', '03:29:30')).toBe('06:00:00');
   });
 
   it(`should throw "${ERR_TIME_FORMAT}"`, () => {
-    expect(() => addTime('1:30:30', '02:45')).toThrow(ERR_TIME_FORMAT);
+    expect(() => sumTime('1:30:30', '02:45')).toThrow(ERR_TIME_FORMAT);
   });
 });
 
-describe('shuffleArr', () => {
+describe('shuffle', () => {
   it('should randomly shuffle an array', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7];
 
-    const shuffled = shuffleArr(arr);
-    expect(shuffleArr(arr)).not.toStrictEqual(arr);
+    const shuffled = shuffle(arr);
+    expect(shuffle(arr)).not.toStrictEqual(arr);
     arr.forEach((item) => expect(shuffled).toContainEqual(item));
     expect(shuffled.length).toBe(arr.length);
   });
@@ -173,11 +173,11 @@ describe('getScrollbarHeight', () => {
   });
 });
 
-describe('getMemoizedFn', () => {
+describe('memoize', () => {
   it('should return a function that returns a cached result for the same arguments', () => {
     const func = jest.fn((description: string) => Symbol(description));
 
-    const memoized = getMemoizedFn(func);
+    const memoized = memoize(func);
 
     const value = memoized('unique');
     expect(memoized('unique')).toBe(value);
@@ -189,7 +189,7 @@ describe('getMemoizedFn', () => {
       Number.isNaN(Number(description)) ? 'string' : 'number'
     );
 
-    const memoized = getMemoizedFn(func, getId);
+    const memoized = memoize(func, getId);
     const value1 = memoized('1');
     const value2 = memoized('4');
     const value3 = memoized('text');
@@ -201,7 +201,7 @@ describe('getMemoizedFn', () => {
     // Without getId
     const func = jest.fn((description: string) => Symbol(description));
 
-    const memoized = getMemoizedFn(func);
+    const memoized = memoize(func);
     memoized('one');
     memoized('one');
     memoized('another');
@@ -217,7 +217,7 @@ describe('getMemoizedFn', () => {
       .mockReturnValueOnce('oneId')
       .mockReturnValueOnce('anotherId');
 
-    const memoized2 = getMemoizedFn(func2, getId);
+    const memoized2 = memoize(func2, getId);
     memoized2();
     memoized2();
     memoized2();

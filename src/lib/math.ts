@@ -5,7 +5,7 @@
  * @param exclude Optional. Array of numbers to exclude from generation
  * @returns Random number
  */
-export const getRandNum = (
+export const randNum = (
   min: number,
   max: number,
   exclude: number[] = []
@@ -22,7 +22,7 @@ export const getRandNum = (
  * @param rate Optional, default is 0.5. Success rate, percentage of generated true booleans
  * @returns Random boolean
  */
-export const getRandBool = (rate = 0.5): boolean => Math.random() < rate;
+export const randBool = (rate = 0.5): boolean => Math.random() < rate;
 
 /**
  * Round a number with custom precision

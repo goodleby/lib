@@ -1,4 +1,4 @@
-import { getRandNum } from './math';
+import { randNum } from './math';
 
 /**
  * Create an array of primes in the range [min, max]
@@ -22,7 +22,7 @@ export const getPrimes = (min: number, max: number): number[] => {
  * @param max Maximum number to generate
  * @returns Random prime
  */
-export const getRandPrime = (min: number, max: number): number => {
+export const randPrime = (min: number, max: number): number => {
   const primes = getPrimes(min, max);
-  return primes[getRandNum(0, primes.length - 1)];
+  return primes[randNum(0, primes.length - 1)];
 };

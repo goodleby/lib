@@ -5,10 +5,10 @@ import {
   matrixDot,
   matrixPlus,
   matrixMinus,
-  linearMatrixDot,
+  matrixMultiply,
   matrixApply,
   getMatrix,
-  getMatrixClone,
+  cloneMatrix,
   transposeMatrix,
 } from '../matrices';
 
@@ -118,7 +118,7 @@ describe('matrixMinus', () => {
   });
 });
 
-describe('linearMatrixDot', () => {
+describe('matrixMultiply', () => {
   it('should multiply corresponding items of matrices', () => {
     const A = [
       [5, 2],
@@ -132,7 +132,7 @@ describe('linearMatrixDot', () => {
       [5, 6],
       [15, 14],
     ];
-    expect(linearMatrixDot(A, B)).toStrictEqual(result);
+    expect(matrixMultiply(A, B)).toStrictEqual(result);
   });
 
   it(`should throw "${ERR_SAME_SIZE}"`, () => {
@@ -145,7 +145,7 @@ describe('linearMatrixDot', () => {
       [5, 3],
       [1, 4],
     ];
-    expect(() => linearMatrixDot(A, B)).toThrow(ERR_SAME_SIZE);
+    expect(() => matrixMultiply(A, B)).toThrow(ERR_SAME_SIZE);
   });
 });
 
@@ -175,7 +175,7 @@ describe('getMatrix', () => {
   });
 });
 
-describe('getMatrixClone', () => {
+describe('cloneMatrix', () => {
   it('should deep clone a matrix', () => {
     const matrix = [
       [
@@ -197,7 +197,7 @@ describe('getMatrixClone', () => {
         [3, 3, 8],
       ],
     ];
-    expect(getMatrixClone(matrix)).toStrictEqual(result);
+    expect(cloneMatrix(matrix)).toStrictEqual(result);
   });
 
   it('should take an optional second argument, a function that takes indices of each item of the matrix and fills it', () => {
@@ -212,7 +212,7 @@ describe('getMatrixClone', () => {
       [0, 1, 2],
       [1, 2, 3],
     ];
-    expect(getMatrixClone(matrix, fillFunc)).toStrictEqual(result);
+    expect(cloneMatrix(matrix, fillFunc)).toStrictEqual(result);
     expect(fillFunc).toHaveBeenNthCalledWith(1, [0, 0]);
     expect(fillFunc).toHaveBeenNthCalledWith(2, [0, 1]);
     expect(fillFunc).toHaveBeenNthCalledWith(3, [0, 2]);
