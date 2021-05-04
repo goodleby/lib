@@ -1,6 +1,6 @@
 {
   "name": "@goodleby/lib",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Library of typed and tested javascript functions",
   "main": "build/goodlebyLib.js",
   "types": "types/",

@@ -6,7 +6,7 @@ export const ERR_MATRIX_MULTIPLY =
   'The number of columns in the 1st matrix must be equal to the number of rows in the 2nd matrix';
 
 /**
- * Multiply matrices with error handling
+ * Find dot product of matrices with error handling
  * @param A Matrix one
  * @param B Matrix two
  * @returns Result matrix
@@ -31,23 +31,27 @@ export const matrixDot = (A: number[][], B: number[][]): number[][] => {
 
 /**
  * Sum matrices with error handling
- * @param A Matrix one
- * @param B Matrix two
+ * @param matrices Sum all passed matrices
  * @returns Result matrix
  */
-export const matrixPlus = (A: number[][], B: number[][]): number[][] => {
+export const matrixPlus = (...matrices: number[][][]): number[][] => {
   // Error handling
-  const mx = [A, B];
-  const cols = A[0].length;
+  const mx = matrices[0];
+  const rows = mx.length;
+  const cols = mx[0].length;
   if (
-    !mx.every((matrix) => matrix.every((row) => row.length === cols)) ||
-    A.length !== B.length
+    matrices.some(
+      (matrix) =>
+        matrix.some((row) => row.length !== cols) || matrix.length !== rows
+    )
   ) {
     throw new Error(ERR_SAME_SIZE);
   }
 
   // Calculations
-  return A.map((rowA, yb) => rowA.map((itemA, xb) => itemA + B[yb][xb]));
+  return matrices.reduce((acc, matrix) =>
+    acc.map((row, y) => row.map((item, x) => item + matrix[y][x]))
+  );
 };
 
 /**
@@ -77,19 +81,24 @@ export const matrixMinus = (A: number[][], B: number[][]): number[][] => {
  * @param B Matrix two
  * @returns Result matrix
  */
-export const linearMatrixDot = (A: number[][], B: number[][]): number[][] => {
+export const linearMatrixDot = (...matrices: number[][][]): number[][] => {
   // Error handling
-  const mx = [A, B];
-  const cols = A[0].length;
+  const mx = matrices[0];
+  const cols = mx.length;
+  const rows = mx[0].length;
   if (
-    !mx.every((item) => item.every((row) => row.length === cols)) ||
-    A.length !== B.length
+    matrices.some(
+      (matrix) =>
+        matrix.some((row) => row.length !== cols) || matrix.length !== rows
+    )
   ) {
     throw new Error(ERR_SAME_SIZE);
   }
 
   // Calculations
-  return A.map((rowA, yb) => rowA.map((colA, xb) => colA * B[yb][xb]));
+  return matrices.reduce((acc, matrix) =>
+    acc.map((row, y) => row.map((item, x) => item * matrix[y][x]))
+  );
 };
 
 /**

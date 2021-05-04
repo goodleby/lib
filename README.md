@@ -1,6 +1,6 @@
 # Library of typed and tested javascript functions
 
-## Math functions
+## Math
 
 #### `getRandNum`
 

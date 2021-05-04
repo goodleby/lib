@@ -110,7 +110,7 @@ export const addTime = (...time: string[]): string => {
 export const shuffleArr = <T>(array: T[]): T[] => {
   const arr = array.slice();
   for (let i = 0; i < arr.length; i++) {
-    const randI = getRandNum(i, arr.length - i);
+    const randI = getRandNum(i, arr.length - i - 1);
     [arr[i], arr[randI]] = [arr[randI], arr[i]];
   }
   return arr;
