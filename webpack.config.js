@@ -3,23 +3,25 @@ const { BannerPlugin } = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { name, homepage, version, license } = require('./package.json');
 
-const camelize = (string) => {
+const camelize = (string, isUpper = false) => {
   const result = string.replace(/[^a-z]+([a-z])?/gi, (_, letter) =>
     letter ? letter.toUpperCase() : ''
   );
-  return result[0].toLowerCase() + result.slice(1);
+  return isUpper ? result : result[0].toLowerCase() + result.slice(1);
 };
 
 const camelName = camelize(name);
 
 const info = [
-  { item: homepage, prefix: '@link' },
-  { item: version, prefix: '@version' },
-  { item: license, prefix: '@licence' },
+  { content: homepage, prefix: '@link' },
+  { content: version, prefix: '@version' },
+  { content: license, prefix: '@licence' },
 ];
 const banner = info
-  .filter(({ item }) => !!item)
-  .map(({ item, prefix }) => `${prefix} ${item}`)
+  .filter(({ content }) => !!content)
+  .map(({ content, prefix, postfix }) =>
+    [prefix, content, postfix].filter((item) => !!item).join(' ')
+  )
   .join(', ');
 
 module.exports = {

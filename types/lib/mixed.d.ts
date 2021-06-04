@@ -9,6 +9,7 @@ export declare const replaceStr: (string: string, search: {
 export declare const filterPhone: (phone: string, countryCode?: string | undefined) => string;
 export declare const camelize: (string: string, isUpper?: boolean) => string;
 export declare const sumTime: (...time: string[]) => string;
+export declare const getYearWeek: (date: string | number | Date) => number;
 export declare const shuffle: <T>(array: T[]) => T[];
 export declare const getPermutations: <T>(items: T[]) => T[][];
 export declare const getDOM: (html: string) => Element[];

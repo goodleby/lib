@@ -112,6 +112,10 @@ _Convert any string to camel case_
 
 _Sum all passed time strings. Strings must be in the same format: HH:MM or HH:MM:SS_
 
+#### `getYearWeek`
+
+_Get a week number of the year_
+
 #### `shuffle`
 
 _Randomly shuffle an array_
