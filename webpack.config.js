@@ -35,6 +35,7 @@ module.exports = {
     // library setup
     library: camelName,
     libraryTarget: 'umd',
+    globalObject: 'this',
   },
   plugins: [new MiniCssExtractPlugin(), new BannerPlugin(banner)],
   resolve: {
