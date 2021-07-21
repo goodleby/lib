@@ -201,7 +201,7 @@ describe('cloneMatrix', () => {
   });
 
   it('should take an optional second argument, a function that takes indices of each item of the matrix and fills it', () => {
-    const fillFunc = jest.fn((indices: number[]) =>
+    const fillFunc = jest.fn((indices: readonly number[]) =>
       indices.reduce((acc, item) => acc + item, 0)
     );
     const matrix = [

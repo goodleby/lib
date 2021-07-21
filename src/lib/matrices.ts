@@ -11,7 +11,10 @@ export const ERR_MATRIX_MULTIPLY =
  * @param B Matrix two
  * @returns Result matrix
  */
-export const matrixDot = (A: number[][], B: number[][]): number[][] => {
+export const matrixDot = (
+  A: readonly number[][],
+  B: readonly number[][]
+): number[][] => {
   // Error handling
   const mx = [A, B];
   const cols = mx.map((matrix) => matrix[0].length);
@@ -31,10 +34,10 @@ export const matrixDot = (A: number[][], B: number[][]): number[][] => {
 
 /**
  * Sum matrices with error handling
- * @param matrices Sum all passed matrices
+ * @param matrices Matrices to sum
  * @returns Result matrix
  */
-export const matrixPlus = (...matrices: number[][][]): number[][] => {
+export const matrixPlus = (...matrices: readonly number[][][]): number[][] => {
   // Error handling
   const mx = matrices[0];
   const rows = mx.length;
@@ -60,7 +63,10 @@ export const matrixPlus = (...matrices: number[][][]): number[][] => {
  * @param B Matrix two
  * @returns Result matrix
  */
-export const matrixMinus = (A: number[][], B: number[][]): number[][] => {
+export const matrixMinus = (
+  A: readonly number[][],
+  B: readonly number[][]
+): number[][] => {
   // Error handling
   const mx = [A, B];
   const cols = A[0].length;
@@ -77,11 +83,12 @@ export const matrixMinus = (A: number[][], B: number[][]): number[][] => {
 
 /**
  * Multiply corresponding items of matrices with error handling
- * @param A Matrix one
- * @param B Matrix two
+ * @param matrices Matrices to multiply
  * @returns Result matrix
  */
-export const matrixMultiply = (...matrices: number[][][]): number[][] => {
+export const matrixMultiply = (
+  ...matrices: readonly number[][][]
+): number[][] => {
   // Error handling
   const mx = matrices[0];
   const cols = mx.length;
@@ -108,7 +115,7 @@ export const matrixMultiply = (...matrices: number[][][]): number[][] => {
  * @returns Result matrix
  */
 export const matrixApply = <T>(
-  matrix: T[][],
+  matrix: readonly T[][],
   func: (item: T, x: number, y: number) => T
 ): T[][] => matrix.map((row, y) => row.map((item, x) => func(item, x, y)));
 
@@ -136,28 +143,27 @@ export const getMatrix = <T>(
  * Deep clone a matrix and optionally fill it
  * @param matrix Matrix to clone
  * @param fillFunc Optional. Function that takes indices of each item of the matrix and fills it
- * @param indices Do not set, internal functionality argument
  * @returns Deep clone of a matrix
  */
 export const cloneMatrix = <T>(
-  matrix: T,
-  fillFunc?: (indices?: number[]) => any,
-  indices: number[] = []
-): T => {
-  if (Array.isArray(matrix)) {
-    return matrix.map((item, i) =>
-      cloneMatrix(item, fillFunc, indices.concat([i]))
-    ) as T & T[];
-  }
-  return fillFunc ? fillFunc(indices) : matrix;
-};
+  matrix: readonly T[],
+  fillFunc?: (indices: readonly number[]) => any,
+  indices: readonly number[] = []
+): T[] =>
+  matrix.map((item, i) => {
+    const updatedIndices = indices.concat([i]);
+    if (Array.isArray(item)) {
+      return cloneMatrix(item, fillFunc, updatedIndices);
+    }
+    return fillFunc ? fillFunc(updatedIndices) : item;
+  });
 
 /**
  * Transpose a matrix
  * @param matrix Matrix to transpose
  * @returns Transposed matrix
  */
-export const transposeMatrix = <T>(matrix: T[][]): T[][] => {
+export const transposeMatrix = <T>(matrix: readonly T[][]): T[][] => {
   // Error handling
   const cols = matrix[0].length;
   if (!matrix.every((row) => row.length === cols)) {

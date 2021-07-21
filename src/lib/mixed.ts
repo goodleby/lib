@@ -37,7 +37,7 @@ export const regexpEscape = (string: string): string =>
  */
 export const replaceStr = (
   string: string,
-  search: { [key: string]: string }
+  search: Readonly<{ [key: string]: string }>
 ): string => {
   const regexp = new RegExp(
     Object.keys(search)
@@ -82,7 +82,7 @@ export const camelize = (string: string, isUpper = false): string => {
  * @param time Time strings in the format HH:MM or HH:MM:SS
  * @returns Result time string
  */
-export const sumTime = (...time: string[]): string => {
+export const sumTime = (...time: readonly string[]): string => {
   if (
     time.some((item) => time[0].split(':').length !== item.split(':').length)
   ) {
@@ -127,7 +127,7 @@ export const getYearWeek = (date: string | number | Date): number => {
  * @param array Array to shuffle
  * @returns Randomly shuffled array
  */
-export const shuffle = <T>(array: T[]): T[] => {
+export const shuffle = <T>(array: readonly T[]): T[] => {
   const arr = array.slice();
   for (let i = 0; i < arr.length; i++) {
     const randI = randNum(i, arr.length - i - 1);
@@ -141,7 +141,7 @@ export const shuffle = <T>(array: T[]): T[] => {
  * @param items Array of items for getting permutations
  * @returns Array of all permutations of items
  */
-export const getPermutations = <T>(items: T[]): T[][] =>
+export const getPermutations = <T>(items: readonly T[]): T[][] =>
   items.flatMap((item, i) => {
     if (items.length === 1) return [[item]];
     const mutations = getPermutations(items.filter((_, j) => i !== j));
@@ -179,7 +179,7 @@ export const getScrollbarHeight = (): number =>
  * @param getId Function for generating an id for caching depending on the arguments
  * @returns Memoized function
  */
-export const memoize = <T extends (...args: any[]) => any>(
+export const memoize = <T extends (...args: readonly any[]) => any>(
   func: T,
   getId: (...args: Parameters<T>) => string = (...args) => JSON.stringify(args)
 ): ((...args: Parameters<T>) => ReturnType<T>) => {
@@ -197,7 +197,7 @@ export const memoize = <T extends (...args: any[]) => any>(
  * @param maxWait Optional. Maximum waiting period before the next call
  * @returns Debounced function
  */
-export const debounce = <T extends (...args: any[]) => void>(
+export const debounce = <T extends (...args: readonly any[]) => void>(
   func: T,
   wait: number,
   maxWait?: number
@@ -246,9 +246,9 @@ export const onSwipe = (
     e: TouchEvent,
     direction: 'left' | 'right' | 'up' | 'down'
   ) => void,
-  options: {
+  options: Readonly<{
     swipeLength?: number;
-  } = {}
+  }> = {}
 ): void => {
   const { swipeLength = 50 } = options;
   const swiper = {

@@ -1,4 +1,4 @@
-export declare const randNum: (min: number, max: number, exclude?: number[]) => number;
+export declare const randNum: (min: number, max: number, exclude?: readonly number[]) => number;
 export declare const randBool: (rate?: number) => boolean;
 export declare const roundTo: (number: number, decimals?: number) => number;
 export declare const floorTo: (number: number, decimals?: number) => number;
@@ -6,4 +6,4 @@ export declare const ceilTo: (number: number, decimals?: number) => number;
 export declare const countDecimals: (number: number) => number;
 export declare const gcd: (a: number, b: number) => number;
 export declare const factorial: (number: number) => number;
-export declare const avg: (...numbers: number[]) => number;
+export declare const avg: (...numbers: readonly number[]) => number;

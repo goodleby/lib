@@ -8,10 +8,11 @@
 export const randNum = (
   min: number,
   max: number,
-  exclude: number[] = []
+  exclude: readonly number[] = []
 ): number => {
   let num = Math.floor(Math.random() * (max - min + 1 - exclude.length) + min);
   exclude
+    .slice()
     .sort((a, b) => a - b)
     .every((exeption) => exeption <= num && (num++, true));
   return num;
@@ -84,5 +85,5 @@ export const factorial = (number: number): number => {
  * @param numbers Numbers to calculate the average
  * @returns Average number
  */
-export const avg = (...numbers: number[]): number =>
+export const avg = (...numbers: readonly number[]): number =>
   numbers.reduce((acc, item) => acc + item, 0) / numbers.length;
