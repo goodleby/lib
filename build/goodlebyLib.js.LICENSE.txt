@@ -1,1 +1,1 @@
-/*! @link https://github.com/goodleby/lib#readme, @version 2.1.2, @licence MIT */
+/*! @link https://github.com/goodleby/lib#readme, @version 3.0.0, @licence MIT */

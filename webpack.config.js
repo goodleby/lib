@@ -25,7 +25,7 @@ const banner = info
   .join(', ');
 
 module.exports = {
-  target: 'browserslist', // or 'node'
+  target: 'browserslist',
   entry: {
     [camelName]: './src/index.ts',
   },
