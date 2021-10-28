@@ -1,8 +1,8 @@
 # Library of typed and tested javascript functions
 
-#### `camelize`
+#### `camelCase`
 
-_Convert any string to camel case_
+_Convert any string to camelCase_
 
 #### `ceilTo`
 
@@ -52,9 +52,17 @@ _Get the height of a horizontal scrollbar_
 
 _Get the width of a vertical scrollbar_
 
+#### `getWords`
+
+_Split a string into an array of words_
+
 #### `getYearWeek`
 
 _Get a week number of the year_
+
+#### `kebabCase`
+
+_Convert any string to kebab-case_
 
 #### `matrixApply`
 
@@ -116,6 +124,10 @@ _Round a number with custom precision_
 
 _Randomly shuffle an array_
 
+#### `snakeCase`
+
+_Convert any string to snake_case_
+
 #### `sumTime`
 
 _Sum all passed time strings. Strings must be in the same format: HH:MM or HH:MM:SS_
@@ -123,3 +135,15 @@ _Sum all passed time strings. Strings must be in the same format: HH:MM or HH:MM
 #### `transposeMatrix`
 
 _Transpose a matrix_
+
+#### `upperKebabCase`
+
+_Convert any string to UPPER-KEBAB-CASE_
+
+#### `upperCamelCase`
+
+_Convert any string to UpperCamelCase_
+
+#### `upperSnakeCase`
+
+_Convert any string to UPPER_SNAKE_CASE_

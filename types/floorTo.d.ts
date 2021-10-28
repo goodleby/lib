@@ -1,1 +1,1 @@
-export declare const floorTo: (number: number, decimals?: number) => number;
+export declare const floorTo: (number: number, decimals: number) => number;
