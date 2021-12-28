@@ -7,20 +7,23 @@ describe('debounce', () => {
 
   it('should return a function that will execute the callback after the waiting period', () => {
     const callback = jest.fn(() => {
-      // do nothing
+      // Do nothing
     });
     const wait = 500;
 
     const debounced = debounce(callback, wait);
     debounced();
+
     expect(callback).not.toBeCalled();
+
     jest.advanceTimersByTime(wait);
+
     expect(callback).toBeCalled();
   });
 
   it('should delay the execution of the callback every time the function is called', () => {
     const callback = jest.fn(() => {
-      // do nothing
+      // Do nothing
     });
     const wait = 500;
 
@@ -28,8 +31,11 @@ describe('debounce', () => {
     for (let i = 0; i < 20; i++) {
       debounced();
     }
+
     expect(callback).not.toBeCalled();
+
     jest.advanceTimersByTime(wait);
+
     expect(callback).toBeCalled();
   });
 
@@ -40,13 +46,14 @@ describe('debounce', () => {
     const debounced = debounce(callback, wait);
     debounced(3, 5);
     jest.advanceTimersByTime(wait);
+
     expect(callback).toBeCalled();
     expect(callback).toHaveBeenCalledWith(3, 5);
   });
 
   it('should take an optional third argument that specifies the maximum allowed period to wait until the callback is executed', () => {
     const callback = jest.fn(() => {
-      // do nothing
+      // Do nothing
     });
     const wait = 500;
     const maxWait = 1000;
@@ -57,8 +64,11 @@ describe('debounce', () => {
       jest.advanceTimersByTime(maxWait / 10);
       debounced();
     }
+
     expect(callback).toHaveBeenCalledTimes(1);
+
     jest.advanceTimersByTime(wait);
+
     expect(callback).toHaveBeenCalledTimes(2);
   });
 

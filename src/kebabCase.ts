@@ -5,5 +5,6 @@ import { getWords } from './getWords';
  * @param string String to convert
  * @returns kebab-case string
  */
-export const kebabCase = (string: string): string =>
-  getWords(string).join('-').toLowerCase();
+export const kebabCase = (string: string): string => {
+  return getWords(string).join('-').toLowerCase();
+};

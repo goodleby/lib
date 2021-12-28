@@ -14,7 +14,7 @@ export const replaceStr = (
     Object.keys(search)
       .map((item) => regexpEscape(item))
       .join('|'),
-    'g'
+    'gu'
   );
   return string.replace(regexp, (match) => search[match]);
 };

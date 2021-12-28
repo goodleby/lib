@@ -17,10 +17,11 @@ describe('matrixMinus', () => {
       [-2, 5],
       [2, -8],
     ];
+
     expect(matrixMinus(A, B)).toStrictEqual(result);
   });
 
-  it(`should throw an error if one matrix has a different size than the other`, () => {
+  it('should throw an error if one matrix has a different size than the other', () => {
     const A = [
       [3, 2, 5],
       [6, 4, 1],
@@ -30,6 +31,7 @@ describe('matrixMinus', () => {
       [5, 3],
       [1, 4],
     ];
+
     expect(() => matrixMinus(A, B)).toThrow();
   });
 });

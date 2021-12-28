@@ -8,6 +8,7 @@ describe('getDOM', () => {
     const elements = getDOM(html);
     const block = document.createElement('div');
     elements.forEach((element) => block.appendChild(element));
+
     expect(block.innerHTML).toStrictEqual(html);
   });
 });

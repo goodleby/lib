@@ -13,6 +13,7 @@ export const transposeMatrix = <T>(matrix: readonly T[][]): T[][] => {
       )}`
     );
   }
+
   // Transformations
   return Array(cols)
     .fill(0)

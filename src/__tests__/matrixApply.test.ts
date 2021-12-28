@@ -10,6 +10,7 @@ describe('matrixApply', () => {
       [9, 4, 25],
       [36, 16, 1],
     ];
+
     expect(matrixApply(matrix, (num) => num ** 2)).toStrictEqual(result);
   });
 });

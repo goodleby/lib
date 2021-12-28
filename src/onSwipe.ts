@@ -21,7 +21,8 @@ export const onSwipe = (
     startY: 0,
 
     onTouchStart(e: TouchEvent) {
-      const { clientX, clientY } = e.touches[0];
+      const [touch] = e.touches;
+      const { clientX, clientY } = touch;
       this.startX = clientX;
       this.startY = clientY;
       element.addEventListener('touchend', swiper.onTouchEnd);
@@ -30,7 +31,8 @@ export const onSwipe = (
 
     onTouchMove(e: TouchEvent) {
       const { startX, startY } = this;
-      const { clientX, clientY } = e.touches[0];
+      const [touch] = e.touches;
+      const { clientX, clientY } = touch;
       const deltaX = clientX - startX;
       const deltaY = clientY - startY;
       if (deltaY <= -swipeLength) callback(e, 'up');

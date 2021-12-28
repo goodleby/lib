@@ -5,12 +5,11 @@ import { getWords } from './getWords';
  * @param string String to convert
  * @returns camelCase string
  */
-export const camelCase = (string: string): string =>
-  getWords(string)
+export const camelCase = (string: string): string => {
+  return getWords(string)
     .map((word, i) => {
-      if (i === 0) {
-        return word.toLowerCase();
-      }
+      if (i === 0) return word.toLowerCase();
       return word[0].toUpperCase() + word.slice(1).toLowerCase();
     })
     .join('');
+};

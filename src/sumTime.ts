@@ -17,12 +17,13 @@ export const sumTime = (...time: readonly string[]): string => {
   const operands = time[0].split(':').length;
   const numbers = Array(operands)
     .fill(0)
-    .map((_, i) =>
-      time.reduce((acc, item, j) => acc + Number(time[j].split(':')[i]), 0)
-    );
+    .map((zero, i) => {
+      return time.reduce((acc, _, j) => acc + Number(time[j].split(':')[i]), 0);
+    });
   for (let i = operands - 2; i >= 0; i--) {
     numbers[i] += Math.floor(numbers[i + 1] / 60);
     numbers[i + 1] %= 60;
   }
+
   return numbers.map((item) => (item < 10 ? `0${item}` : item)).join(':');
 };

@@ -6,13 +6,14 @@
  */
 export const cloneMatrix = <T>(
   matrix: readonly T[],
-  fillFunc?: (indices: readonly number[]) => any,
+  fillFunc?: (indices: readonly number[]) => any, // eslint-disable-line @typescript-eslint/no-explicit-any
   indices: readonly number[] = []
-): T[] =>
-  matrix.map((item, i) => {
+): T[] => {
+  return matrix.map((item, i) => {
     const updatedIndices = indices.concat([i]);
     if (Array.isArray(item)) {
       return cloneMatrix(item, fillFunc, updatedIndices);
     }
     return fillFunc ? fillFunc(updatedIndices) : item;
   });
+};

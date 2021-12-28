@@ -5,6 +5,7 @@
  * @param maxWait Optional. Maximum waiting period before the next call
  * @returns Debounced function
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const debounce = <T extends (...args: readonly any[]) => void>(
   func: T,
   wait: number,
@@ -16,8 +17,8 @@ export const debounce = <T extends (...args: readonly any[]) => void>(
     );
   }
 
-  let mainTimer: NodeJS.Timeout | null = null;
-  let maxTimer: NodeJS.Timeout | null = null;
+  let mainTimer: ReturnType<typeof setTimeout> | null = null;
+  let maxTimer: ReturnType<typeof setTimeout> | null = null;
 
   return (...args: Parameters<T>): void => {
     const call = () => {

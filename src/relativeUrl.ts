@@ -5,5 +5,6 @@ import { popSlash } from './popSlash';
  * @param url URL to convert
  * @returns Relative URL without trailing slash
  */
-export const relativeUrl = (url: string): string =>
-  popSlash(url.replace(/^(?:\/\/|[^/])+/, ''));
+export const relativeUrl = (url: string): string => {
+  return popSlash(url.replace(/^(?:\/\/|[^/])+/u, ''));
+};

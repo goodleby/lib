@@ -10,6 +10,7 @@ describe('getMatrix', () => {
       [1, 2],
       [2, 3],
     ];
+
     expect(getMatrix(rows, cols, fillFunc)).toStrictEqual(result);
     expect(fillFunc).toHaveBeenNthCalledWith(1, 0, 0);
     expect(fillFunc).toHaveBeenNthCalledWith(2, 1, 0);

@@ -22,13 +22,14 @@ describe('cloneMatrix', () => {
         [3, 3, 8],
       ],
     ];
+
     expect(cloneMatrix(matrix)).toStrictEqual(result);
   });
 
   it('should take an optional second argument, a function that takes indices of each item of the matrix and fills it', () => {
-    const fillFunc = jest.fn((indices: readonly number[]) =>
-      indices.reduce((acc, item) => acc + item, 0)
-    );
+    const fillFunc = jest.fn((indices: readonly number[]) => {
+      return indices.reduce((acc, item) => acc + item, 0);
+    });
     const matrix = [
       [3, 2, 5],
       [6, 4, 1],
@@ -37,6 +38,7 @@ describe('cloneMatrix', () => {
       [0, 1, 2],
       [1, 2, 3],
     ];
+
     expect(cloneMatrix(matrix, fillFunc)).toStrictEqual(result);
     expect(fillFunc).toHaveBeenNthCalledWith(1, [0, 0]);
     expect(fillFunc).toHaveBeenNthCalledWith(2, [0, 1]);

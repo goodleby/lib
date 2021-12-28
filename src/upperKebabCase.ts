@@ -5,5 +5,6 @@ import { getWords } from './getWords';
  * @param string String to convert
  * @returns UpperCamel case string
  */
-export const upperKebabCase = (string: string): string =>
-  getWords(string).join('-').toUpperCase();
+export const upperKebabCase = (string: string): string => {
+  return getWords(string).join('-').toUpperCase();
+};

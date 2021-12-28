@@ -26,10 +26,11 @@ export const matrixDot = (
       )} and B=${JSON.stringify(B)}`
     );
   }
+
   // Calculations
-  return A.map((rowA) =>
-    B[0].map((_, xb) =>
-      rowA.reduce((acc, itemA, yb) => acc + itemA * B[yb][xb], 0)
-    )
-  );
+  return A.map((rowA) => {
+    return B[0].map((_, xb) => {
+      return rowA.reduce((acc, itemA, yb) => acc + itemA * B[yb][xb], 0);
+    });
+  });
 };

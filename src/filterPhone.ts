@@ -7,7 +7,7 @@
 export const filterPhone = (phone: string, countryCode?: string): string => {
   const regexp = new RegExp(
     `${countryCode ? `(^\\s*\\+?\\s*(${countryCode}))?` : ''}[^0-9]*`,
-    'g'
+    'gu'
   );
   return [countryCode, phone.replace(regexp, '')]
     .filter((item) => !!item)

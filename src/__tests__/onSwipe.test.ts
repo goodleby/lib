@@ -18,7 +18,7 @@ describe('onSwipe', () => {
         force: 1,
         altitudeAngle: 0,
         azimuthAngle: 0,
-        touchType: 'direct' as TouchType,
+        touchType: 'direct',
       },
     ];
     const touchEvent = new TouchEvent(type, {

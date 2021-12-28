@@ -14,6 +14,7 @@ describe('getPermutations', () => {
 
     const permutations = getPermutations(items);
     result.forEach((item) => expect(permutations).toContainEqual(item));
+
     expect(permutations.length).toBe(result.length);
   });
 });

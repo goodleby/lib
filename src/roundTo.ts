@@ -4,5 +4,6 @@
  * @param decimals Number of decimal places to round to
  * @returns Rounded number
  */
-export const roundTo = (number: number, decimals: number): number =>
-  Math.round(number * 10 ** decimals) / 10 ** decimals;
+export const roundTo = (number: number, decimals: number): number => {
+  return Math.round(number * 10 ** decimals) / 10 ** decimals;
+};

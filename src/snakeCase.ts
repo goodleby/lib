@@ -5,5 +5,6 @@ import { getWords } from './getWords';
  * @param string String to convert
  * @returns snake_case string
  */
-export const snakeCase = (string: string): string =>
-  getWords(string).join('_').toLowerCase();
+export const snakeCase = (string: string): string => {
+  return getWords(string).join('_').toLowerCase();
+};

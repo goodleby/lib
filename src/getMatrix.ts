@@ -9,11 +9,12 @@ export const getMatrix = <T>(
   rows: number,
   cols: number,
   fillFunc: (x: number, y: number) => T
-): T[][] =>
-  Array(rows)
+): T[][] => {
+  return Array(rows)
     .fill(0)
-    .map((row, y) =>
-      Array(cols)
+    .map((row, y) => {
+      return Array(cols)
         .fill(0)
-        .map((col, x) => fillFunc(x, y))
-    );
+        .map((col, x) => fillFunc(x, y));
+    });
+};

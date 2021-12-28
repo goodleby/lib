@@ -21,6 +21,7 @@ export const matrixMinus = (
       )} and B=${JSON.stringify(B)}`
     );
   }
+
   // Calculations
   return A.map((rowA, yb) => rowA.map((itemA, xb) => itemA - B[yb][xb]));
 };

@@ -17,10 +17,11 @@ describe('matrixPlus', () => {
       [8, 9],
       [10, 10],
     ];
+
     expect(matrixPlus(A, B)).toStrictEqual(result);
   });
 
-  it(`should throw an error if some of the matrices have a different size`, () => {
+  it('should throw an error if some of the matrices have a different size', () => {
     const A = [
       [3, 2, 5],
       [6, 4, 1],
@@ -30,6 +31,7 @@ describe('matrixPlus', () => {
       [5, 3],
       [1, 4],
     ];
+
     expect(() => matrixPlus(A, B)).toThrow();
   });
 });

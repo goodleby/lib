@@ -17,10 +17,11 @@ describe('matrixMultiply', () => {
       [15, 14],
       [24, 9],
     ];
+
     expect(matrixMultiply(A, B)).toStrictEqual(result);
   });
 
-  it(`should throw an error if some of the matrices have a different size`, () => {
+  it('should throw an error if some of the matrices have a different size', () => {
     const A = [
       [3, 2, 5],
       [6, 4, 1],
@@ -30,6 +31,7 @@ describe('matrixMultiply', () => {
       [5, 3],
       [1, 4],
     ];
+
     expect(() => matrixMultiply(A, B)).toThrow();
   });
 });
