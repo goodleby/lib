@@ -4,8 +4,7 @@
  * @param getId Function for generating an id for caching depending on the arguments
  * @returns Memoized function
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const memoize = <T extends (...args: readonly any[]) => any>(
+export const memoize = <T extends (...args: Parameters<T>) => ReturnType<T>>(
   func: T,
   getId: (...args: Parameters<T>) => string = (...args) => JSON.stringify(args)
 ): ((...args: Parameters<T>) => ReturnType<T>) => {

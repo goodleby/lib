@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /**
  * Deep clone a matrix and optionally fill it
  * @param matrix Matrix to clone

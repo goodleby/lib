@@ -16,21 +16,20 @@ export const onSwipe = (
   }> = {}
 ): void => {
   const { swipeLength = 50 } = options;
-  const swiper = {
-    startX: 0,
-    startY: 0,
+  let startX = 0;
+  let startY = 0;
 
-    onTouchStart(e: TouchEvent) {
+  const swiper = {
+    onTouchStart(this: void, e: TouchEvent) {
       const [touch] = e.touches;
       const { clientX, clientY } = touch;
-      this.startX = clientX;
-      this.startY = clientY;
+      startX = clientX;
+      startY = clientY;
       element.addEventListener('touchend', swiper.onTouchEnd);
       element.addEventListener('touchmove', swiper.onTouchMove);
     },
 
-    onTouchMove(e: TouchEvent) {
-      const { startX, startY } = this;
+    onTouchMove(this: void, e: TouchEvent) {
       const [touch] = e.touches;
       const { clientX, clientY } = touch;
       const deltaX = clientX - startX;
@@ -45,7 +44,7 @@ export const onSwipe = (
       }
     },
 
-    onTouchEnd() {
+    onTouchEnd(this: void) {
       element.removeEventListener('touchend', swiper.onTouchEnd);
       element.removeEventListener('touchmove', swiper.onTouchMove);
     },

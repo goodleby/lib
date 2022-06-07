@@ -8,8 +8,10 @@ describe('shuffle', () => {
 
     expect(shuffle(arr)).not.toStrictEqual(arr);
 
-    arr.forEach((item) => expect(shuffled).toContainEqual(item));
+    arr.forEach((item) => {
+      expect(shuffled).toContainEqual(item);
+    });
 
-    expect(shuffled.length).toBe(arr.length);
+    expect(shuffled).toHaveLength(arr.length);
   });
 });

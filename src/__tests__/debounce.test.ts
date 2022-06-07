@@ -14,11 +14,11 @@ describe('debounce', () => {
     const debounced = debounce(callback, wait);
     debounced();
 
-    expect(callback).not.toBeCalled();
+    expect(callback).not.toHaveBeenCalled();
 
     jest.advanceTimersByTime(wait);
 
-    expect(callback).toBeCalled();
+    expect(callback).toHaveBeenCalled();
   });
 
   it('should delay the execution of the callback every time the function is called', () => {
@@ -32,11 +32,11 @@ describe('debounce', () => {
       debounced();
     }
 
-    expect(callback).not.toBeCalled();
+    expect(callback).not.toHaveBeenCalled();
 
     jest.advanceTimersByTime(wait);
 
-    expect(callback).toBeCalled();
+    expect(callback).toHaveBeenCalled();
   });
 
   it('should execute the callback with the arguments passed to the function', () => {
@@ -47,7 +47,7 @@ describe('debounce', () => {
     debounced(3, 5);
     jest.advanceTimersByTime(wait);
 
-    expect(callback).toBeCalled();
+    expect(callback).toHaveBeenCalled();
     expect(callback).toHaveBeenCalledWith(3, 5);
   });
 
