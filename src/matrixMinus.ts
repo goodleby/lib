@@ -1,5 +1,5 @@
 /**
- * Substract matrices with error handling
+ * Subtract matrices with error handling
  * @param A Matrix one
  * @param B Matrix two
  * @returns Result matrix

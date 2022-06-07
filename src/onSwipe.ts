@@ -1,7 +1,7 @@
 /**
  * Listen to touch events and execute callback when the user has swiped for at least specified threshold
  * @param element Element to listen to touch events
- * @param callback Callback function that gets TocuhEvent and direction string
+ * @param callback Callback function that gets TouchEvent and direction string
  * @param options Optional. Event listener options:
  * * `swipeLength` - Default is 50. Swipe threshold in pixels
  */

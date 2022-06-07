@@ -74,7 +74,7 @@ _Multiply matrices with error handling_
 
 #### `matrixMinus`
 
-_Substract matrices with error handling_
+_Subtract matrices with error handling_
 
 #### `matrixMultiply`
 

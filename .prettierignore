@@ -12,3 +12,4 @@ types/
 
 # misc
 .DS_Store
+.eslintcache

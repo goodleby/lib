@@ -45,7 +45,7 @@ const camelName = camelCase(name);
 const info = [
   { content: homepage, prefix: '@link ' },
   { content: version, prefix: '@version ' },
-  { content: license, prefix: '@licence ' },
+  { content: license, prefix: '@license ' },
 ];
 const banner = info
   .filter(({ content }) => !!content)

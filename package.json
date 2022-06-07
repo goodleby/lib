@@ -1,6 +1,6 @@
 {
   "name": "@goodleby/lib",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Library of typed and tested javascript functions",
   "main": "build/goodlebyLib.js",
   "types": "types/",
@@ -62,7 +62,7 @@
     "@types/jest": "^28.1.1",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
-    "eslint-config-goodleby": "^0.0.2",
+    "eslint-config-goodleby": "^1.0.1",
     "husky": "^8.0.1",
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1",

@@ -14,8 +14,8 @@ export const randNum = (
   exclude
     .slice()
     .sort((a, b) => a - b)
-    .every((exeption) => {
-      if (exeption <= num) {
+    .every((exception) => {
+      if (exception <= num) {
         num++;
         return true;
       }

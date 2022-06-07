@@ -8,6 +8,7 @@ coverage/
 
 # misc
 .DS_Store
+.eslintcache
 
 # git tools
 .github
